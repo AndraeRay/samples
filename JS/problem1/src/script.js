@@ -12,7 +12,7 @@ var countModule = (function() {
 
 	function init(a,z,b){
 		obj = this;
-		start = a, end = z, base = b;
+		start = a, end = z, base = b, outputQueue = [];
 		tallyOddsAndMultiples(a, z, b);
 	}
 
@@ -31,8 +31,9 @@ var countModule = (function() {
 	}
 
 	function display(dispFunction) {
-		var i;
-		for(i=0; i<=outputQueue.length; i++){
+		var i, queueLength;
+		queueLength = outputQueue.length;
+		for(i=0; i<queueLength; i++){
 			dispFunction(outputQueue.pop());
 		}
 		dispFunction("Odd numbers: " + String(countOfOddNumbers));

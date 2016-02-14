@@ -103,6 +103,21 @@ describe("This module displays special text as it iterates over numbers,", funct
 
   });
 
+  it('should send all statements to print function', function() {
+    var start = 1, end = 10, factor = 16, output = [];
+    countModule.init(start, end, factor);
+
+    function customWriter(item){
+      output.push(item)
+    }
+
+    countModule.display(customWriter);
+
+    expect(output.length).toBe(12);
+    expect(output[0]).toBe('1!');
+    expect(output[9]).toBe('10');
+  })
+
 
   
 });
