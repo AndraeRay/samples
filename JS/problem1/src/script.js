@@ -8,10 +8,10 @@ var countModule = (function() {
 		end = 0, 
 		base = 0,
 		outputQueue = [],
-		obj;
+		self;
 
 	function init(a,z,b){
-		obj = this;
+		self = this;
 		start = a, end = z, base = b, outputQueue = [];
 		tallyOddsAndMultiples(a, z, b);
 	}
@@ -20,10 +20,10 @@ var countModule = (function() {
 		countOfMultiples = 0, countOfOddNumbers = 0;
 		var currentNum = 0;
 		for (currentNum = start; currentNum <= end; currentNum++){
-			if (obj.isOddNumber(currentNum)){
+			if (self.isOddNumber(currentNum)){
 				countOfOddNumbers++;
 			} 
-			if (obj.isAMultipleOfB(currentNum, base)){
+			if (self.isAMultipleOfB(currentNum, base)){
 				countOfMultiples++;
 			}
 			outputQueue.unshift(countModule.getOutput(currentNum))
@@ -51,16 +51,19 @@ var countModule = (function() {
 			return (product / factor1);
 		},
 		getOutput : function(number){
-			var factor;
+			var factor, output;
 			if (this.isOddNumber(number)){
-				return String(number).concat('!');
+				output =  String(number).concat('!');
 			} else {
 				if (this.isAMultipleOfB(number, base)){
 					factor = this.getMissingFactor(number, base);
-					return 'Sixteen times '.concat(String(factor));
+					output = 'Sixteen times '.concat(String(factor));
+				} else {
+					output = String(number);
 				}
-				return String(number);
+				
 			}
+			return output;
 		},
 		getTallyOfOdds: function (){
 			   return countOfOddNumbers;
